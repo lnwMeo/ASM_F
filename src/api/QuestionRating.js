@@ -1,7 +1,7 @@
 import axios from "axios";
-
+const apiUrl = import.meta.env.VITE_API_URL;
 export const createQuestionrating = async (token, form) => {
-  return axios.post("http://localhost:5000/api/createquestionrating", form, {
+  return axios.post(`${apiUrl}/createquestionrating`, form, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -9,7 +9,7 @@ export const createQuestionrating = async (token, form) => {
 };
 export const updateQuestionrating = async (id, token, form) => {
   return axios.put(
-    `http://localhost:5000/api/updatequestionrating/${id}`,
+    `${apiUrl}/updatequestionrating/${id}`,
     form,
     {
       headers: {
@@ -19,12 +19,12 @@ export const updateQuestionrating = async (id, token, form) => {
   );
 };
 export const removeQuestionrating = async (id, token) => {
-  return axios.delete(`http://localhost:5000/api/removequestionrating/${id}`, {
+  return axios.delete(`${apiUrl}/removequestionrating/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 };
 export const listQuestionrating = async () => {
-  return axios.get("http://localhost:5000/api/listquestionrating");
+  return axios.get(`${apiUrl}/listquestionrating`);
 };

@@ -307,20 +307,20 @@ const PageForm = () => {
                 <FileInputImg onFileSelect={handleFileSelect} reset={reset} />
               </div>
               <div className="my-2">
-                <p>งบประมาณการให้บริการ</p>
+                <p>รายการค่าวัสดุอุปกรณ์</p>
                 {/* ServiceBudget */}
                 <ServiceBudget
                   onFieldsChange={handleFieldsChange}
                   reset={reset}
                 />
               </div>
-              <p>รายละเอียด</p>
+              <p>รายละเอียดของงาน (พอสังเขป)</p>
               <textarea
                 value={newdescription}
                 onChange={(e) => setNewDescription(e.target.value)}
                 type="text"
                 className="w-full  px-1 py-1 border rounded-md mt-1 text-xs md:text-sm xl:text-sm"
-                placeholder="รายละเอียด"
+                placeholder="กรอก รายละเอียดของงาน (พอสังเขป)"
               />
             </div>
           </div>

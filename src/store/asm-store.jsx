@@ -1,13 +1,13 @@
 import axios from "axios";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const asmStore = (set) => ({
   user: null,
   token: null,
   actionLogin: async (form) => {
-    const res = await axios.post("http://localhost:5000/api/login", form);
+    const res = await axios.post(`${apiUrl}/login`, form);
     set({
       user: res.data.payload,
       token: res.data.token,
@@ -20,7 +20,6 @@ const asmStore = (set) => ({
       token: null,
     });
     localStorage.removeItem("asm-store");
-   
   },
 });
 
@@ -30,7 +29,5 @@ const usePersist = {
 };
 
 const useAsmStore = create(persist(asmStore, usePersist));
-
-
 
 export default useAsmStore;

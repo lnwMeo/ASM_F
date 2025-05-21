@@ -1,27 +1,29 @@
 import axios from "axios";
-
+const apiUrl = import.meta.env.VITE_API_URL;
 export const listServiceWork = async () => {
-  return axios.get("http://localhost:5000/api/listservicework");
+  return axios.get(`${apiUrl}/listservicework`);
 };
 export const listServiceWorkById = async (id) => {
-  return axios.get(`http://localhost:5000/api/listserviceworkbyid/${id}`, {
+  return axios.get(`${apiUrl}/listserviceworkbyid/${id}`, {
     headers: {
       "Cache-Control": "no-cache",
+      "Content-Type": "application/json",
+      "Accept": "application/json",
     },
+    withCredentials: true,
   });
 };
+
+
+
 export const UpdateStatusServiceWork = async (payload) => {
-  return axios.post(
-    "http://localhost:5000/api/updatestatusservicework",
-    payload,
-    {
-      headers: { "Content-Type": "application/json" },
-    }
-  );
+  return axios.post(`${apiUrl}/updatestatusservicework`, payload, {
+    headers: { "Content-Type": "application/json" },
+  });
 };
 
 export const CreateServiceWork = async (dataform) => {
-  return axios.post("http://localhost:5000/api/createservicework", dataform, {
+  return axios.post(`${apiUrl}/createservicework`, dataform, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 };
@@ -31,7 +33,7 @@ export const getServiceSummary = async (month, year) => {
   if (month) params.month = month;
   if (year) params.year = year;
 
-  return axios.get("http://localhost:5000/api/getservicesummary", { params });
+  return axios.get(`${apiUrl}/getservicesummary`, { params });
 };
 
 export const getEmployeeSummary = async (
@@ -45,5 +47,5 @@ export const getEmployeeSummary = async (
   if (employeeId) params.employeeId = employeeId;
   if (month) params.month = month;
   if (year) params.year = year;
-  return axios.get("http://localhost:5000/api/getemployeesummary", { params });
+  return axios.get(`${apiUrl}/getemployeesummary`, { params });
 };

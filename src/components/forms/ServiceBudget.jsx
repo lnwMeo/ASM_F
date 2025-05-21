@@ -42,7 +42,7 @@ const ServiceBudget = ({ onFieldsChange, reset = false }) => {
           <input
             type="text"
             className="w-3/5 px-1 py-1 border rounded-md"
-            placeholder="งบประมาณการให้บริการ"
+            placeholder="กรอก ชื่อวัสดุอุปกรณ์"
             value={field.ServiceBudgetname}
             onChange={(e) =>
               handleFieldChange(index, "ServiceBudgetname", e.target.value)

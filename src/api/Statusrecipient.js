@@ -1,25 +1,21 @@
 import axios from "axios";
-
-export const createStatusrecipient = async (token,form ) => {
-  return axios.post("http://localhost:5000/api/createstatusrecipient", form, {
+const apiUrl = import.meta.env.VITE_API_URL;
+export const createStatusrecipient = async (token, form) => {
+  return axios.post(`${apiUrl}/createstatusrecipient`, form, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 };
-export const updateStatusrecipient = async (id,token, form ) => {
-  return axios.put(
-    `http://localhost:5000/api/updatestatusrecipient/${id}`,
-    form,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+export const updateStatusrecipient = async (id, token, form) => {
+  return axios.put(`${apiUrl}/updatestatusrecipient/${id}`, form, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
-export const removeStatusrecipient = async (id,token ) => {
-  return axios.delete(`http://localhost:5000/api/removestatusrecipient/${id}`, {
+export const removeStatusrecipient = async (id, token) => {
+  return axios.delete(`${apiUrl}/removestatusrecipient/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -27,5 +23,5 @@ export const removeStatusrecipient = async (id,token ) => {
 };
 
 export const listStatusrecipient = async () => {
-  return axios.get("http://localhost:5000/api/liststatusrecipient");
+  return axios.get(`${apiUrl}/liststatusrecipient`);
 };

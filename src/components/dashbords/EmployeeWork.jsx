@@ -4,8 +4,7 @@ import { getEmployeeSummary } from "../../api/Servicework"; // ปรับใ�
 import { listGroupwork } from "../../api/Groupwork";
 import { listEmployeeGroupwork } from "../../api/Employee";
 import { LuRefreshCcw } from "react-icons/lu";
-
-
+import { ThreeDots } from "react-loader-spinner";
 const EmployeeWork = () => {
   const [groupworkId, setGroupworkId] = useState("");
   const [employeeId, setEmployeeId] = useState("");
@@ -14,7 +13,7 @@ const EmployeeWork = () => {
   const [data, setData] = useState([]);
   const [groupworks, setGroupworks] = useState([]);
   const [employees, setEmployees] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   const fetchData = async () => {
     try {
       const response = await getEmployeeSummary(
@@ -24,6 +23,7 @@ const EmployeeWork = () => {
         month
       );
       setData(response.data);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -141,11 +141,27 @@ const EmployeeWork = () => {
             ))}
           </select>
         </div>
-        <button onClick={resetFilters} className="bg-indigo-800 hover:bg-indigo-600  rounded-sm px-2 py-1 text-white">
+        <button
+          onClick={resetFilters}
+          className="bg-indigo-800 hover:bg-indigo-600  rounded-sm px-2 py-1 text-white"
+        >
           <LuRefreshCcw />
         </button>
       </div>
-
+      {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <ThreeDots
+              visible={true}
+              height="80"
+              width="80"
+              color="#4338ca"
+              radius="9"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          </div>
+        ) : (
       <div className="p-2 text-sm">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500">
           <thead className="text-center text-xs text-gray-900 uppercase bg-green-200">
@@ -180,9 +196,13 @@ const EmployeeWork = () => {
           </tbody>
         </table>
       </div>
+        )}
       <div className="flex justify-center p-2">
-      <ExportPDFEM data={data} year={year} month={month} />
+        {groupworkId || employeeId || year || month ? (
+          <ExportPDFEM data={data} year={year} month={month} />
+        ) : null}
       </div>
+      
     </div>
   );
 };

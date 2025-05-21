@@ -14,12 +14,14 @@ import AdminSettingAdmin from "../pages/pagesAdmin/AdminSettingAdmin";
 import AdminSettingStatusRecipient from "../pages/pagesAdmin/AdminSettingStatusRecipient";
 import AdminSettingQuestion from "../pages/pagesAdmin/AdminSettingQuestion";
 import LoginAD from "../pages/LoginAD";
+import ErrorPage from "../pages/ErrorPage";
 
 import ProtectRouter from "./ProtectRouter";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LayoutDashbord />,
+    errorElement: <ErrorPage />, // เพิ่ม errorElement
     children: [
       { index: true, element: <Dashbord /> },
       { path: "/pageform", element: <PageForm /> },
@@ -31,6 +33,7 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <ProtectRouter element={<LayoutAdmin />} />,
+    errorElement: <ErrorPage />, // เพิ่ม errorElement
     children: [
       { index: true, element: <Adminindex /> },
       {
